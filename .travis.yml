@@ -1,11 +1,8 @@
 language: python
-python: "3.6"
 services: docker
 
 env:
   global:
-    # DOCKER_EMAIL:
-    - secure: fQQRMDiw7nSKOCFtJqwGryd4S1M6lYgn4nhI06h/UdapRjg/i54nB13Jtd+y/8PQOvNtOJEdMD5+VmKc+ebIhAoEdvMMVqLEGrOHJBHN+ZVTYOQtHcKBka30rddlFZbhvt2tJZEt0AhIcPC3cI/i3tyHvn8tkQFGX3pvp8Y60dcph07cNPJseI/bYc6Pw3XwYVi5LL2peGwZuLzh5sjTzyOW/qdfMXMgxZ3OlJ+JjUWZiC8fJzn3X/ttD3E3U81kHwx40qRMXvovSeXlQqHY59/drKBWi+pV3qOmtoy03bifx0hN2QialJqtZwVGNg36o8BHiM+C6FVLqfT4FXgTA1IvrnPvOgDYrkWsilgnPxwp4DMZGCFAD4GA+reOyUSha4NskKxA8RYqvAnN4pzw0G++Lv1tnOp/Y0YNERIyb4MKoVtonLuzZf4vJ/sJChESA6AVLNdh66fCUusslXT1aXn9JgIEuTzvTKKjGJJBp9v5cgJEX14xoVJBvQcDP2ET0hGGqLD4N+/tFdH+dWFkDl3W3LXfJcR3vT0QNVGdFREZXSSyfUX+4ViO8BONfeQlxF9gsq268w85yV7clEcrKDlX5/J01oTxiLhuzSRf7yLVddHKumo85V7mtekEzM2XRKZiWl42F4TCqd0sfbWi2ctSGND3u3XUp3VYPD0ZwLc=
     # DOCKER_USER:
     - secure: KxrLvKfu5CY06V5pOwOqB/mGFlm2w8i0+bQmyG/05NU0m2Hh8zNsJiY5n2RWvNRtzcsNDJV4JIyPl0FesvbA4SvgsVTmbmmpcGkX3UNtXlBYIjJFosaO1WuRFViFwJ0PTvLJXbpQvV+gfjj/wnd1YyCgjV7wy29QpJmjKy+Tw5N5633NSL0tjwKRCVRibrki5SdF8JTAEJo1FaBhIWjvd7NKgbf3j/vq6bLlAw+2P1P7AdJj1bI6dFUccSQmo9ugHqiTCio25B/zVAdrjWAnJDvdP1mtyBalk+sAvNXCzBGmrBNWzW3mtT3/ApMDB8nap0/eOzGt/ZeUU0E93wjzTbCLAZogV/8IwunHs9LpLTJBbcUz3ZEuPSJaOIBwy1MAktsO4deQV3/59q+42cglf2iMPuGdhFiOYGof88FrkNa7+fZzQUDwkT77PdV9e+JRsKAlD5+oKI/eLO6kP9/y6+UtM+wZbRUJT8PzHd9g88vbtSprLIg5XZsHuAHH3A0PY4vuC/CXelS0UhsCv8Cxz5v9ozfi8uXIf9GbhGBYGmAjkozVISbPTKmyjS/veoX+oA3wk3eLoQa6NgkGmxOZ33Lv7iFpn80BJFpLO7xlfXQD9jgLyZ/wARmE+LPr8qog2lP6ozGWSGNWKCPDjeiPm4F0WuryRY38i61lBv58Jbc=
     # DOCKER_PASS:
@@ -23,7 +20,7 @@ install: docker build -t $REPO:$COMMIT .
 script: true
 
 after_success:
-- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-- docker tag $REPO:$COMMIT $REPO:TAG
+- docker tag $REPO:$COMMIT $REPO:$TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
 - docker push $REPO
