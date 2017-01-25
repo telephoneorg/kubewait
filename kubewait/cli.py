@@ -46,6 +46,7 @@ class KubeWaitLogHandler(LoggingLogHandler):
     def exception(self, msg, *args, **kwargs):
         self.backend.exception(msg, *args, **kwargs)
 
+
 class KubeWaitController(CementBaseController):
     class Meta:
         label = 'base'
@@ -73,6 +74,7 @@ class KubeWaitController(CementBaseController):
                          self.app.pargs.requirements,
                          self.app.log.backend.name,
                          config['sleep_interval'])
+
         self.app.log.info('Got KubeApps instance: %s', kapps)
 
         kapps.wait()

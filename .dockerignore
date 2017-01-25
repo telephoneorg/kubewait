@@ -1,0 +1,10 @@
+kubewait/
+test/
+*.md
+*.in
+*.rst
+*.txt
+*.py
+*.ini
+LICENSE
+Makefile

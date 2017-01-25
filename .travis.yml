@@ -1,0 +1,29 @@
+language: python
+python: "3.6"
+addons:
+  apt:
+    packages:
+    - zsh
+services: docker
+
+env:
+  global:
+    # DOCKER_EMAIL:
+    - secure: fQQRMDiw7nSKOCFtJqwGryd4S1M6lYgn4nhI06h/UdapRjg/i54nB13Jtd+y/8PQOvNtOJEdMD5+VmKc+ebIhAoEdvMMVqLEGrOHJBHN+ZVTYOQtHcKBka30rddlFZbhvt2tJZEt0AhIcPC3cI/i3tyHvn8tkQFGX3pvp8Y60dcph07cNPJseI/bYc6Pw3XwYVi5LL2peGwZuLzh5sjTzyOW/qdfMXMgxZ3OlJ+JjUWZiC8fJzn3X/ttD3E3U81kHwx40qRMXvovSeXlQqHY59/drKBWi+pV3qOmtoy03bifx0hN2QialJqtZwVGNg36o8BHiM+C6FVLqfT4FXgTA1IvrnPvOgDYrkWsilgnPxwp4DMZGCFAD4GA+reOyUSha4NskKxA8RYqvAnN4pzw0G++Lv1tnOp/Y0YNERIyb4MKoVtonLuzZf4vJ/sJChESA6AVLNdh66fCUusslXT1aXn9JgIEuTzvTKKjGJJBp9v5cgJEX14xoVJBvQcDP2ET0hGGqLD4N+/tFdH+dWFkDl3W3LXfJcR3vT0QNVGdFREZXSSyfUX+4ViO8BONfeQlxF9gsq268w85yV7clEcrKDlX5/J01oTxiLhuzSRf7yLVddHKumo85V7mtekEzM2XRKZiWl42F4TCqd0sfbWi2ctSGND3u3XUp3VYPD0ZwLc=
+    # DOCKER_USER:
+    - secure: KxrLvKfu5CY06V5pOwOqB/mGFlm2w8i0+bQmyG/05NU0m2Hh8zNsJiY5n2RWvNRtzcsNDJV4JIyPl0FesvbA4SvgsVTmbmmpcGkX3UNtXlBYIjJFosaO1WuRFViFwJ0PTvLJXbpQvV+gfjj/wnd1YyCgjV7wy29QpJmjKy+Tw5N5633NSL0tjwKRCVRibrki5SdF8JTAEJo1FaBhIWjvd7NKgbf3j/vq6bLlAw+2P1P7AdJj1bI6dFUccSQmo9ugHqiTCio25B/zVAdrjWAnJDvdP1mtyBalk+sAvNXCzBGmrBNWzW3mtT3/ApMDB8nap0/eOzGt/ZeUU0E93wjzTbCLAZogV/8IwunHs9LpLTJBbcUz3ZEuPSJaOIBwy1MAktsO4deQV3/59q+42cglf2iMPuGdhFiOYGof88FrkNa7+fZzQUDwkT77PdV9e+JRsKAlD5+oKI/eLO6kP9/y6+UtM+wZbRUJT8PzHd9g88vbtSprLIg5XZsHuAHH3A0PY4vuC/CXelS0UhsCv8Cxz5v9ozfi8uXIf9GbhGBYGmAjkozVISbPTKmyjS/veoX+oA3wk3eLoQa6NgkGmxOZ33Lv7iFpn80BJFpLO7xlfXQD9jgLyZ/wARmE+LPr8qog2lP6ozGWSGNWKCPDjeiPm4F0WuryRY38i61lBv58Jbc=
+    # DOCKER_PASS:
+    - secure: FSJbtivRQxpMuihZWgg6GwwGNWpPwWwRxR/W8zBV42BRhdIgfAQQB+1eJ9qWx6I6KGWP9jOzDrVAmDtEPtmqBhqfsqRmNLVglEVjRctBTLJ+gJ6WByuCeYDX5meMDqxe4ZdjFYkv619I2nXt113/okIzU+sVU7Sr/R59hJbhsNyIvEhxVWG87RJX07rF+LbQ1rn3OaaRK/miffzv+o2pc3q2Oi0tDMnGHdXGnUeZLjPab/Om4bdh+P0sMs39E58cDynQtehFh1kAnkjkw++iRaFelOVDx+zuG+824Xi1wdnjAnOdyFINO9DcFnqSsRKnE4lq5zb5lO4HADkfpQyLe/2tvFcnubw7qUgvypeN3AKhEv4+j53FLNzOvTlce+fKVD4xko7YqrgI/En9FYn5De7cHxMIrJzXwcnCgN8uucIiX8W2I3N4OxzTdpdHnjkXpFbThZR/FXVBc6AmnRq2XZ2VxKe9GIarKk8rBDXaYXLyNMEFkwWxUfjEZusxKzIhpxW4F+O5NvOXSff1LswWWK8mCx8Y04d/II7ShHvIJ45NXU3oKd1D0u1ysO20JkTxf64PU5AwF+SQCLq2wWwgBgm+GYBKxA+aYzV9oItqW9MAOYvuPT0RLIOllIer0lLyiwAWVLfdL2sW/yyh0yrVNZJx+4pfnUr9VaC0ctwIjl4=
+    - COMMIT=${TRAVIS_COMMIT::6}
+    - BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+    - REPO=$DOCKER_USER/$(basename $TRAVIS_REPO_SLUG)
+    - TAG=$(if [[ $BRANCH == "master" ]]; then echo "latest"; else echo $BRANCH; fi)
+
+install: docker build -t $REPO:$COMMIT .
+
+after_success:
+- echo "COMMIT: $COMMIT  BRANCH: $BRANCH  REPO: $REPO  TAG: $TAG"
+- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- docker tag $REPO:$COMMIT $REPO:TAG
+- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker push $REPO

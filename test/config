@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Config
+current-context: default
+clusters:
+  - name: default
+    cluster: {}
+users:
+  - name: admin
+    user: {}
+contexts:
+  - name: default
+    context:
+      cluster: default
+      user: admin

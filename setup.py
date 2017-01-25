@@ -16,13 +16,14 @@ with open('README.rst') as fd:
 setup(
     name='kubewait',
     version=version,
-    description='Pause container init until required kube services are ready',
+    description='Pause container init until required kube services are ready,',
     long_description=long_description,
     keywords=['kubernetes', 'clustering', 'init-container'],
     author='Joe Black',
     author_email='joeblack949@gmail.com',
     url='https://github.com/joeblackwaslike/kubewait',
-    download_url='https://github.com/joeblackwaslike/kubewait/tarball/0.2.0',
+    download_url=(
+        'https://github.com/joeblackwaslike/kubewait/tarball/%s' % version),
     license='Apache 2.0',
     zip_safe=False,
     packages=find_packages(),

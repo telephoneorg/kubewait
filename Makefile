@@ -6,7 +6,10 @@ WORKON_HOME := $(shell echo $$WORKON_HOME)
 VENV_PATH := $(WORKON_HOME)/$(PROJECT)
 VENV_BIN_PATH := $(VENV_PATH)/bin
 
-.PHONY: init develop publish test
+DOCKER_REPO = callforamerica
+DOCKER_TAG := $(DOCKER_REPO)/$(PROJECT):latest
+
+.PHONY: init develop publish test build
 
 init:
 	@zsh -ilc "mkvirtualenv -a $(PWD) -r requirements.txt -r requirements-test.txt $(PROJECT)"
@@ -22,3 +25,6 @@ publish:
 
 test:
 	$(VENV_BIN_PATH)/py.test
+
+build:
+	@docker build -t $(DOCKER_TAG) --force-rm .
