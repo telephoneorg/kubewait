@@ -1,9 +1,5 @@
 language: python
 python: "3.6"
-addons:
-  apt:
-    packages:
-    - zsh
 services: docker
 
 env:
@@ -22,7 +18,7 @@ env:
 install: docker build -t $REPO:$COMMIT .
 
 after_success:
-- echo "COMMIT: $COMMIT  BRANCH: $BRANCH  REPO: $REPO  TAG: $TAG"
+- 'echo "COMMIT: $COMMIT  BRANCH: $BRANCH  REPO: $REPO  TAG: $TAG"'
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - docker tag $REPO:$COMMIT $REPO:TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
