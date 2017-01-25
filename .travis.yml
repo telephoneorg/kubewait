@@ -11,14 +11,16 @@ env:
     # DOCKER_PASS:
     - secure: FSJbtivRQxpMuihZWgg6GwwGNWpPwWwRxR/W8zBV42BRhdIgfAQQB+1eJ9qWx6I6KGWP9jOzDrVAmDtEPtmqBhqfsqRmNLVglEVjRctBTLJ+gJ6WByuCeYDX5meMDqxe4ZdjFYkv619I2nXt113/okIzU+sVU7Sr/R59hJbhsNyIvEhxVWG87RJX07rF+LbQ1rn3OaaRK/miffzv+o2pc3q2Oi0tDMnGHdXGnUeZLjPab/Om4bdh+P0sMs39E58cDynQtehFh1kAnkjkw++iRaFelOVDx+zuG+824Xi1wdnjAnOdyFINO9DcFnqSsRKnE4lq5zb5lO4HADkfpQyLe/2tvFcnubw7qUgvypeN3AKhEv4+j53FLNzOvTlce+fKVD4xko7YqrgI/En9FYn5De7cHxMIrJzXwcnCgN8uucIiX8W2I3N4OxzTdpdHnjkXpFbThZR/FXVBc6AmnRq2XZ2VxKe9GIarKk8rBDXaYXLyNMEFkwWxUfjEZusxKzIhpxW4F+O5NvOXSff1LswWWK8mCx8Y04d/II7ShHvIJ45NXU3oKd1D0u1ysO20JkTxf64PU5AwF+SQCLq2wWwgBgm+GYBKxA+aYzV9oItqW9MAOYvuPT0RLIOllIer0lLyiwAWVLfdL2sW/yyh0yrVNZJx+4pfnUr9VaC0ctwIjl4=
     - COMMIT=${TRAVIS_COMMIT::6}
-    - BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-    - REPO=$DOCKER_USER/$(basename $TRAVIS_REPO_SLUG)
-    - TAG=$(if [[ $BRANCH == "master" ]]; then echo "latest"; else echo $BRANCH; fi)
+
+before_install:
+- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+- export REPO=$DOCKER_USER/$(basename $TRAVIS_REPO_SLUG)
+- export TAG=$(if [[ $BRANCH == "master" ]]; then echo "latest"; else echo $BRANCH; fi)
+- 'echo "COMMIT: $COMMIT  BRANCH: $BRANCH  REPO: $REPO  TAG: $TAG"'
 
 install: docker build -t $REPO:$COMMIT .
 
 after_success:
-- 'echo "COMMIT: $COMMIT  BRANCH: $BRANCH  REPO: $REPO  TAG: $TAG"'
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - docker tag $REPO:$COMMIT $REPO:TAG
 - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
