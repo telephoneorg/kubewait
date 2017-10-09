@@ -1,12 +1,12 @@
 SHELL = /bin/zsh
 SHELLFLAGS = -ilc
 
-PROJECT := $(shell basename $(shell pwd))
+PROJECT := kubewait
 WORKON_HOME := $(shell echo $$WORKON_HOME)
 VENV_PATH := $(WORKON_HOME)/$(PROJECT)
 VENV_BIN_PATH := $(VENV_PATH)/bin
 
-DOCKER_REPO = callforamerica
+DOCKER_REPO = telephoneorg
 DOCKER_TAG := $(DOCKER_REPO)/$(PROJECT):latest
 
 .PHONY: init develop publish test build

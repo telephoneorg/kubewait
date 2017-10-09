@@ -1,6 +1,6 @@
 FROM python:3-alpine
 
-MAINTAINER Joe Black <joeblack949@gmail.com>
+MAINTAINER Joe Black <me@joeblack.nyc>
 
 ENV     KUBEWAIT_VERSION 0.2.1
 
@@ -11,11 +11,12 @@ LABEL   app.name=kubewait \
 ADD     https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /dumb-init
 RUN     chmod +x /dumb-init
 
-RUN     pip3 install kubewait
+RUN     pip3 install kubewait==$KUBEWAIT_VERSION
 
 ENV     ENVIRONMENT production
 ENV     LOG_LEVEL INFO
 ENV     NAMESPACE default
 ENV     DOMAIN cluster.local
 
-ENTRYPOINT  ["/dumb-init", "--", "kubewait"]
+ENTRYPOINT  ["/dumb-init", "--"]
+CMD     ["kubewait"]

@@ -1,26 +1,40 @@
+addons:
+  apt:
+    packages:
+    - realpath
 language: python
+python:
+- "3.6"
 services: docker
-
 env:
   global:
-    # DOCKER_USER:
-    - secure: KxrLvKfu5CY06V5pOwOqB/mGFlm2w8i0+bQmyG/05NU0m2Hh8zNsJiY5n2RWvNRtzcsNDJV4JIyPl0FesvbA4SvgsVTmbmmpcGkX3UNtXlBYIjJFosaO1WuRFViFwJ0PTvLJXbpQvV+gfjj/wnd1YyCgjV7wy29QpJmjKy+Tw5N5633NSL0tjwKRCVRibrki5SdF8JTAEJo1FaBhIWjvd7NKgbf3j/vq6bLlAw+2P1P7AdJj1bI6dFUccSQmo9ugHqiTCio25B/zVAdrjWAnJDvdP1mtyBalk+sAvNXCzBGmrBNWzW3mtT3/ApMDB8nap0/eOzGt/ZeUU0E93wjzTbCLAZogV/8IwunHs9LpLTJBbcUz3ZEuPSJaOIBwy1MAktsO4deQV3/59q+42cglf2iMPuGdhFiOYGof88FrkNa7+fZzQUDwkT77PdV9e+JRsKAlD5+oKI/eLO6kP9/y6+UtM+wZbRUJT8PzHd9g88vbtSprLIg5XZsHuAHH3A0PY4vuC/CXelS0UhsCv8Cxz5v9ozfi8uXIf9GbhGBYGmAjkozVISbPTKmyjS/veoX+oA3wk3eLoQa6NgkGmxOZ33Lv7iFpn80BJFpLO7xlfXQD9jgLyZ/wARmE+LPr8qog2lP6ozGWSGNWKCPDjeiPm4F0WuryRY38i61lBv58Jbc=
-    # DOCKER_PASS:
-    - secure: FSJbtivRQxpMuihZWgg6GwwGNWpPwWwRxR/W8zBV42BRhdIgfAQQB+1eJ9qWx6I6KGWP9jOzDrVAmDtEPtmqBhqfsqRmNLVglEVjRctBTLJ+gJ6WByuCeYDX5meMDqxe4ZdjFYkv619I2nXt113/okIzU+sVU7Sr/R59hJbhsNyIvEhxVWG87RJX07rF+LbQ1rn3OaaRK/miffzv+o2pc3q2Oi0tDMnGHdXGnUeZLjPab/Om4bdh+P0sMs39E58cDynQtehFh1kAnkjkw++iRaFelOVDx+zuG+824Xi1wdnjAnOdyFINO9DcFnqSsRKnE4lq5zb5lO4HADkfpQyLe/2tvFcnubw7qUgvypeN3AKhEv4+j53FLNzOvTlce+fKVD4xko7YqrgI/En9FYn5De7cHxMIrJzXwcnCgN8uucIiX8W2I3N4OxzTdpdHnjkXpFbThZR/FXVBc6AmnRq2XZ2VxKe9GIarKk8rBDXaYXLyNMEFkwWxUfjEZusxKzIhpxW4F+O5NvOXSff1LswWWK8mCx8Y04d/II7ShHvIJ45NXU3oKd1D0u1ysO20JkTxf64PU5AwF+SQCLq2wWwgBgm+GYBKxA+aYzV9oItqW9MAOYvuPT0RLIOllIer0lLyiwAWVLfdL2sW/yyh0yrVNZJx+4pfnUr9VaC0ctwIjl4=
-    - COMMIT=${TRAVIS_COMMIT::6}
+  - GITHUB_USER={{ github_user }}
+  - GITHUB_ORG={{ github_org }}
+  - DOCKER_USER={{ docker_user }}
+  - DOCKER_ORG={{ docker_org }}
+  # DOCKER_PASS
+  - secure: "dq5A/0j37SZ71Lb6XbV+QgbDUJv2qSOjt9kC2LOFMiHF/Qbn0CirgJOV9Ze4ctMcoAcNIm8sqzM+q88zHBBscbmysIwyrcHjYAf63RIMHf76nzGtwEspqfBDQMVc67oZPiS7ENGWak3VlelFFNwcEqwnwCYFQ3mmilbRXUzY0taYTyK6hkgnESYxWmFkZEbHe3hSndvp6lcMRBPbLNOBCm9TE4R6rExZClNRipjRHvdeHS0Qr6zpV4dC6Bv9JhNEBbFJKG/9uoHCYclr7vtBu3/ykahLN93fwxNuOVk0+QFQGti7VPEa6JS1MtnmHYjJX9D9kMMHZHLmy/EEfcRcKlIIYUNT3x4KaeVjK2sDE38GFRN5jP6WEDJxZskkei8IRLw7pEoamUWMSyDHfwK1cLQupoWpOCcz4ULAZYJfLRPcyVisfQ5Hu/TqCH7sTQzVdnDtdpYBtC0QA4v41pc2tFVI0ZTpI51dFMMQGU+BNvA5z9CchkJsvpNu8I1OoCTErkRN3Kk3W2W1VxMvuBNr9MmQWHQn6tEZjM4/l/HRaJy5u9yIyOhtu0J3farM098I2d1lFMZbOufxivfofPg4NjaarFQQWlql8aiymg/bARM2+4t+H9qnMk0zVXRNdWjYaQx3cyitCgYbRkoTPUWlH1q1iwHdrxQuK9U09BzedHc="
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+  slack:
+    rooms:
+    - secure: "e07TZTjQy52EgTThTqx3nWhniyUJQNeQmj3/gew9bfdSpgATr2aAdBlZFeXLjSC1wgtcuATB5rm2dgex83h1OLJpfVbijeX46B3WK1s8NE+7jZXXX5hutzZ+f9Dmh+PFh8EJOakiXXn9j83PeJhotHBO2wGyuQSTcK8Jpf7HC6ACUm9RkV3f5PEVOGobll4haCKFCSddKg34AAPE752b1HHe1sW7hJ2S2ETn/RrIWGZA1Patl6N2TI9Jg2dcMSlwh0BR+IqiH30x8drJ/xeH+K9kjeK+TtH7CiDsm0VCRO+KqHgLKwpIUEXauTI+MOB+/9LNUA//Yv3QzeP/XJ3UpHsZMIfvNw1kmF38PokXDFwL5vjTbi2WDzqY5I34xHABXqYkGqtNs7LLEOrzndEfihdmSQRlp8xORU1JISF/i8yr2GKUwoRiSqMyWTjy67sVmgLkpy6ZkEL3vcDInRNuha4g8UBuj04KQkMuRNAcKGIMnteKcgtCYV0jw3EbglTnjJQdjadWM8J4wZcVSbZA8TQGWhyOmAe3PrkUL5WtjI585B2PqRcsMxMuFniQuwF/MvaqLuu3C2EyxyOya5hpNaSPyjW13jncaRh4BY9et5qsruQW6WFmoqB0Rd1M40Jf97vx6Ieg1BTi3CPSChCN/HmR9McxdLyPS2DsOsxNp8w="
+    on_success: always
+    on_failure: always
 
 before_install:
-- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-- export REPO=$DOCKER_USER/$(basename $TRAVIS_REPO_SLUG)
-- export TAG=$(if [[ $BRANCH == "master" ]]; then echo "latest"; else echo $BRANCH; fi)
-- 'echo "COMMIT: $COMMIT  BRANCH: $BRANCH  REPO: $REPO  TAG: $TAG"'
+- source scripts/ci/environment.sh
+- pip install invoke
 
-install: docker build -t $REPO:$COMMIT .
+install: pip install -e .
 
 script: true
 
 after_success:
-- docker tag $REPO:$COMMIT $REPO:$TAG
-- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-- docker login -u $DOCKER_USER -p $DOCKER_PASS
-- docker push $REPO
+- inv docker.build
+- ci-tag-build
+- hub-push
+- hub-update-readme

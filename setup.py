@@ -20,10 +20,10 @@ setup(
     long_description=long_description,
     keywords=['kubernetes', 'clustering', 'init-container'],
     author='Joe Black',
-    author_email='joeblack949@gmail.com',
-    url='https://github.com/joeblackwaslike/kubewait',
+    author_email='me@joeblack.nyc',
+    url='https://github.com/telephoneorg/kubewait',
     download_url=(
-        'https://github.com/joeblackwaslike/kubewait/tarball/%s' % version),
+        'https://github.com/telephoneorg/kubewait/tarball/%s' % version),
     license='Apache 2.0',
     zip_safe=False,
     packages=find_packages(),

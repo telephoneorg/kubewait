@@ -7,9 +7,9 @@ metadata:
         [
             {
                 "name": "kubewait",
-                "image": "callforamerica/kubewait",
+                "image": "telephoneorg/kubewait",
                 "imagePullPolicy": "IfNotPresent",
-                "args": ["rabbitmq", "couchdb"],
+                "args": ["web1", "web2"],
                 "env": [
                     {
                         "name": "NAMESPACE",
@@ -22,7 +22,7 @@ metadata:
                     },
                     {
                         "name": "LOG_LEVEL",
-                        "value": "DEBUG"
+                        "value": "INFO"
                     }
                 ]
             }
