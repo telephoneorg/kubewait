@@ -8,10 +8,10 @@ python:
 services: docker
 env:
   global:
-  - GITHUB_USER={{ github_user }}
-  - GITHUB_ORG={{ github_org }}
-  - DOCKER_USER={{ docker_user }}
-  - DOCKER_ORG={{ docker_org }}
+  - GITHUB_USER=joeblackwaslike
+  - GITHUB_ORG=telephoneorg
+  - DOCKER_USER=joeblackwaslike
+  - DOCKER_ORG=telephoneorg
   # DOCKER_PASS
   - secure: "dq5A/0j37SZ71Lb6XbV+QgbDUJv2qSOjt9kC2LOFMiHF/Qbn0CirgJOV9Ze4ctMcoAcNIm8sqzM+q88zHBBscbmysIwyrcHjYAf63RIMHf76nzGtwEspqfBDQMVc67oZPiS7ENGWak3VlelFFNwcEqwnwCYFQ3mmilbRXUzY0taYTyK6hkgnESYxWmFkZEbHe3hSndvp6lcMRBPbLNOBCm9TE4R6rExZClNRipjRHvdeHS0Qr6zpV4dC6Bv9JhNEBbFJKG/9uoHCYclr7vtBu3/ykahLN93fwxNuOVk0+QFQGti7VPEa6JS1MtnmHYjJX9D9kMMHZHLmy/EEfcRcKlIIYUNT3x4KaeVjK2sDE38GFRN5jP6WEDJxZskkei8IRLw7pEoamUWMSyDHfwK1cLQupoWpOCcz4ULAZYJfLRPcyVisfQ5Hu/TqCH7sTQzVdnDtdpYBtC0QA4v41pc2tFVI0ZTpI51dFMMQGU+BNvA5z9CchkJsvpNu8I1OoCTErkRN3Kk3W2W1VxMvuBNr9MmQWHQn6tEZjM4/l/HRaJy5u9yIyOhtu0J3farM098I2d1lFMZbOufxivfofPg4NjaarFQQWlql8aiymg/bARM2+4t+H9qnMk0zVXRNdWjYaQx3cyitCgYbRkoTPUWlH1q1iwHdrxQuK9U09BzedHc="
 
